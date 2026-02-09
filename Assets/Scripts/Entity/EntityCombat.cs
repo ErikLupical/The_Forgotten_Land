@@ -6,17 +6,17 @@ public class EntityCombat : MonoBehaviour
     public int attack;
 
     [Header("Abilities")]
+    public Collider2D hurtbox;
     public AbilityObject ability;
 
     [Header("Timing")]
-    public float cooldown;
     public float timer;
 
-    private void Start()
+    private void Awake()
     {
         if (ability != null)
         {
-            cooldown = ability.cooldown;
+            ability.hurtbox = hurtbox;
         }
     }
 
@@ -30,6 +30,18 @@ public class EntityCombat : MonoBehaviour
 
     public void Normal()
     {
-        if (ability != null) ability.Execute();
+        if (ability != null)
+        {
+            ability.Execute();
+            timer = ability.cooldown;
+        }
     }
+
+    //public void Knockback(Transform attacker, float knockback)
+    //{
+    //    GetComponent<EnemyMovement>().actionState = 
+    //    actionState = ActionState.Interrupted;
+    //    Vector2 direction = transform.position - attacker.position;
+    //    rb.linearVelocity = direction.normalized * knockback;
+    //}
 }

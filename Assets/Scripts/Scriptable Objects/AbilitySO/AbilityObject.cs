@@ -17,18 +17,14 @@ public abstract class AbilityObject : ScriptableObject
     [Header("Timing")]
     public float cooldown;
 
-    [Header("Hitbox")]
-    [HideInInspector] public Collider2D hurtbox;
-    public LayerMask hitMask;
+    [Header("Hurtbox")]
+    public Collider2D hurtbox;
+    public GameObject owner => hurtbox?.transform.parent?.gameObject;
+    public EntityCombat ownerCombat => owner?.GetComponent<EntityCombat>();
 
     [Header("Impact")]
     public float damageMultiplier;
     public float knockBack;
-
-    public virtual void Initialize(GameObject owner)
-    {
-        hurtbox = owner.GetComponentInChildren<Collider2D>();
-    }
 
     public abstract void Execute();
 }

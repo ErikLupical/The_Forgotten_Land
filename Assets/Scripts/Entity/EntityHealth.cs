@@ -41,6 +41,7 @@ public class EntityHealth : MonoBehaviour
 
     public void ChangeHealth(int amount)
     {
+        Debug.Log("Changing health by: " + amount);
         if (!isAlive) return;
 
         if (amount + currentHealth >= maxHealth) currentHealth = maxHealth;
@@ -67,8 +68,14 @@ public class EntityHealth : MonoBehaviour
         float deathLength = anim.GetCurrentAnimatorStateInfo(0).length - 0.1f;
         yield return new WaitForSeconds(deathLength);
 
-        Destroy(gameObject);
-        //gameObject.SetActive(false);
+        if (gameObject.tag == "Player")
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         yield break;
     }
 }

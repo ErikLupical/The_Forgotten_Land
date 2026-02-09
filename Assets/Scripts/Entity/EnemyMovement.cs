@@ -54,7 +54,7 @@ public class EnemyMovement : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             anim.SetFloat("horizontal", 0);
             anim.SetFloat("vertical", 0);
-            if (CanAttack())
+            if (CanAttack() && player.gameObject.activeInHierarchy)
             {
                 StartCoroutine(Attack());
             }
@@ -75,7 +75,7 @@ public class EnemyMovement : MonoBehaviour
         // Wait one frame so the animator switches states
         yield return null;
 
-        float animationLength = anim.GetCurrentAnimatorStateInfo(0).length;
+        float animationLength = anim.GetCurrentAnimatorStateInfo(0).length - 0.01f;
         yield return new WaitForSeconds(animationLength);
 
         actionState = ActionState.Idle;

@@ -10,20 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 402267024ec287d48af1571ff04b6399, type: 3}
-  m_Name: Default Melee Normal Attack
+  m_Name: Default Knight Attack
   m_EditorClassIdentifier: Assembly-CSharp::DefaultMeleeNormalAttack
-  abilityName: Melee Attack
+  abilityName: Default Attack
   description: Attacks enemies in front of you, dealing 100% of your ATK as damage.
-  windup: 0.15
-  recovery: 0.3
-  cooldown: 0
-  chargeCost: 0
-  chargeGain: 2.5
-  radius: 2
-  angle: 100
-  hitMask:
-    serializedVersion: 2
-    m_Bits: 8
+  cooldown: 1
+  hurtbox: {fileID: 0}
   damageMultiplier: 1
-  knockBack: 10
-  canBeInterrupted: 0
+  knockBack: 1
