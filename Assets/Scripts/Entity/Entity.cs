@@ -119,7 +119,7 @@ public class Entity : MonoBehaviour
         if (ultimateAbility == null) return;
         if (!CanStartAbility()) return;
         if (ultimateCooldown > 0f) return;
-        if (charge < ultimateAbility.chargeCost) return;
+        //if (charge < ultimateAbility.chargeCost) return;
 
         StartAbility(ultimateAbility);
         ultimateCooldown = ultimateAbility.cooldown;
@@ -189,19 +189,19 @@ public class Entity : MonoBehaviour
 
         activeAbility = ability;
         state = ActionState.Windup;
-        actionTimer = ability.windup;
+        //actionTimer = ability.windup;
     }
 
     void ExecuteActiveAbility()
     {
         if (activeAbility == null) return;
 
-        activeAbility.Execute(this);
+        activeAbility.Execute();
     }
 
     public void Interrupt()
     {
-        if (!activeAbility.canBeInterrupted) return;
+        //if (!activeAbility.canBeInterrupted) return;
         if (state == ActionState.Interrupted) return;
         if (state == ActionState.Dash) return;
 
@@ -242,7 +242,7 @@ public class Entity : MonoBehaviour
             case ActionState.Windup:
                 ExecuteActiveAbility();
                 state = ActionState.Recovery;
-                actionTimer = activeAbility.recovery;
+                //actionTimer = activeAbility.recovery;
                 break;
 
             case ActionState.Recovery:

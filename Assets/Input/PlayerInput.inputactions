@@ -25,33 +25,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Special",
-                    "type": "Button",
-                    "id": "47704a35-d653-47eb-80bf-66a4bd628bba",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Ultimate",
-                    "type": "Button",
-                    "id": "e528703e-4570-4618-9fc8-36d0108c07b2",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Dash",
-                    "type": "Button",
-                    "id": "a8cfe625-6b6f-42f8-88b5-55ee07f5e46d",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Move",
                     "type": "PassThrough",
                     "id": "72b1ed5d-361e-43f6-bf3f-fd4416d5c854",
@@ -62,17 +35,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "0c9e988c-1ff9-4176-9cee-db647d97e1bc",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Special",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "WASD",
                     "id": "53ecffd8-fc7c-4af0-ab56-119da1778747",
@@ -141,34 +103,12 @@
                 },
                 {
                     "name": "",
-                    "id": "c0ab0d8e-9e68-4c61-8ebd-bb9228147f41",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Ultimate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "d2969c97-073a-4734-bd1b-fc8d1f7efa27",
                     "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fbab1a26-57d7-4865-a4d2-dfc5ca2f2d0c",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
