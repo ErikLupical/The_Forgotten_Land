@@ -36,12 +36,4 @@ public class EntityCombat : MonoBehaviour
             timer = ability.cooldown;
         }
     }
-
-    //public void Knockback(Transform attacker, float knockback)
-    //{
-    //    GetComponent<EnemyMovement>().actionState = 
-    //    actionState = ActionState.Interrupted;
-    //    Vector2 direction = transform.position - attacker.position;
-    //    rb.linearVelocity = direction.normalized * knockback;
-    //}
 }

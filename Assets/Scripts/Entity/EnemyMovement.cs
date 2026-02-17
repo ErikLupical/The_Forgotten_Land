@@ -3,90 +3,58 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public float speed = 1f;
-
     public Transform player;
+    private bool aggressive;
     public float range = 1.5f;
+
     private float squareRrange;
     private float squareDistance;
-
-    public Rigidbody2D rb;
     private Vector2 direction;
 
-    public Animator anim;
-    public int facingX = 1;
-
-    public ActionState actionState;
-    public EntityCombat entityCombat;
-
-    public enum ActionState
-    {
-        Idle,
-        Attacking,
-        Interrupted,
-    }
+    public EntityBehavior entityBehavior;
 
     private void Awake()
     {
         player = GameObject.FindWithTag("Player").transform;
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
     }
 
     private void Start()
     {
         squareRrange = range * range;
-        actionState = ActionState.Idle;
+        entityBehavior.actionState = EntityBehavior.ActionState.Idle;
     }
 
     private void FixedUpdate()
     {
-        Vector2 rawDirection = (Vector2)(player.position - transform.position);
-        squareDistance = rawDirection.sqrMagnitude;
-        direction = rawDirection.normalized;
+        if (entityBehavior.actionState != EntityBehavior.ActionState.Idle) return;
 
-        if (actionState == ActionState.Idle)
+        if (aggressive)
         {
-            Move();
-        }
-        if (squareDistance <= squareRrange)
-        {
-            rb.linearVelocity = Vector2.zero;
-            anim.SetFloat("horizontal", 0);
-            anim.SetFloat("vertical", 0);
-            if (CanAttack() && player.gameObject.activeInHierarchy)
+            Vector2 rawDirection = (Vector2)(player.position - transform.position);
+            squareDistance = rawDirection.sqrMagnitude;
+            direction = rawDirection.normalized;
+
+            if (entityBehavior.actionState == EntityBehavior.ActionState.Idle)
             {
-                StartCoroutine(Attack());
+                Move();
+            }
+            if (squareDistance <= squareRrange)
+            {
+                entityBehavior.rb.linearVelocity = Vector2.zero;
+                entityBehavior.UpdateAnimation(0, 0);
+
+                if (entityBehavior.CanAttack() && player.gameObject.activeInHierarchy)
+                {
+                    StartCoroutine(entityBehavior.Attack());
+                }
             }
         }
     }
-    private bool CanAttack()
+
+    private void OnDisable()
     {
-        return actionState != ActionState.Attacking &&
-               actionState != ActionState.Interrupted &&
-               entityCombat.timer <= 0;
-    }
-
-    public IEnumerator Attack()
-    {
-        actionState = ActionState.Attacking;
-        anim.SetBool("attacking", true);
-
-        // Wait one frame so the animator switches states
-        yield return null;
-
-        float animationLength = anim.GetCurrentAnimatorStateInfo(0).length - 0.01f;
-        yield return new WaitForSeconds(animationLength);
-
-        actionState = ActionState.Idle;
-        anim.SetBool("attacking", false);
-        yield break;
-    }
-
-    public void OnAttackFinished()
-    {
-        actionState = ActionState.Idle;
-        anim.SetBool("attacking", false);
+        if (aggressive)
+            EnemyManager.instance?.UnregisterEntity(gameObject);
     }
 
     // Chases the player up to a certain range, stop when dead
@@ -95,21 +63,30 @@ public class EnemyMovement : MonoBehaviour
         if (direction.x > 0 && transform.localScale.x < 0 ||
             direction.x < 0 && transform.localScale.x > 0)
         {
-            Flip();
+            entityBehavior.Flip();
         }
 
-        if (GetComponent<EntityHealth>().isAlive && squareDistance > squareRrange)
-            rb.linearVelocity = new Vector2(direction.x, direction.y) * speed;
-        else
-            rb.linearVelocity = Vector2.zero;
+        entityBehavior.UpdateAnimation(Mathf.Abs(direction.x), Mathf.Abs(direction.y));
 
-        anim.SetFloat("horizontal", Mathf.Abs(rb.linearVelocity.x));
-        anim.SetFloat("vertical", Mathf.Abs(rb.linearVelocity.y));
+        if (GetComponent<EntityHealth>().isAlive && squareDistance > squareRrange)
+            entityBehavior.rb.linearVelocity = new Vector2(direction.x, direction.y) * entityBehavior.speed;
+        else
+            entityBehavior.rb.linearVelocity = Vector2.zero;
     }
 
-    private void Flip()
+    public bool Aggressive
     {
-        facingX *= -1;
-        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        get => aggressive;
+        set
+        {
+            if (aggressive == value) return;
+
+            aggressive = value;
+
+            if (aggressive)
+                EnemyManager.instance?.RegisterEntity(gameObject);
+            else
+                EnemyManager.instance?.UnregisterEntity(gameObject);
+        }
     }
 }

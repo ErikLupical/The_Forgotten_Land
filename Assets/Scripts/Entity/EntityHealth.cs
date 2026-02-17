@@ -41,7 +41,6 @@ public class EntityHealth : MonoBehaviour
 
     public void ChangeHealth(int amount)
     {
-        Debug.Log("Changing health by: " + amount);
         if (!isAlive) return;
 
         if (amount + currentHealth >= maxHealth) currentHealth = maxHealth;

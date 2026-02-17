@@ -1,30 +1,17 @@
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 1f;
-
-    public Rigidbody2D rb;
-    private Vector2 direction;
     public InputActionReference move;
     public InputActionReference interact;
     public InputActionReference normal;
 
-    public Animator anim;
-    public int facingX = 1;
-
     public bool inCombat;
-    public ActionState actionState;
-    public EntityCombat entityCombat;
+    public EntityBehavior entityBehavior;
 
-    public enum ActionState
-    {
-        Idle,
-        Attacking,
-        Interrupted,
-    }
+    private List<IInteractable> nearbyInteractables = new List<IInteractable>();
 
     private void OnEnable()
     {
@@ -34,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDisable()
     {
-        interact.action.started += OnInteractCallback;
+        interact.action.started -= OnInteractCallback;
         normal.action.started -= OnAttackCallback;
     }
 
@@ -49,76 +36,74 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnInteract()
     {
-        // Interaction logic here
-        Debug.Log("Interacted");
-        return;
+        if (nearbyInteractables.Count == 0) return;
+
+        IInteractable closest = null;
+        float minDistance = Mathf.Infinity;
+
+        if (!inCombat)
+        {
+            foreach (IInteractable interactable in nearbyInteractables)
+            {
+                float distance = Vector2.Distance(
+                    transform.position,
+                    interactable.GetTransform().position
+                );
+
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    closest = interactable;
+                }
+            }
+
+            closest?.Interact();
+        }
     }
 
     public void OnAttack()
     {
-        if (CanAttack())
+        if (entityBehavior.CanAttack() && inCombat)
         {
-            StartCoroutine(Attack());
+            StartCoroutine(entityBehavior.Attack());
         }
     }
 
     void FixedUpdate()
     {
-        if (actionState == ActionState.Idle) Move();
-        else if (actionState == ActionState.Attacking)
-            rb.linearVelocity = Vector2.zero;
-    }
+        inCombat = EnemyManager.instance != null && EnemyManager.instance.InCombat;
 
-    private bool CanAttack()
-    {
-        return actionState != ActionState.Attacking &&
-               actionState != ActionState.Interrupted &&
-               inCombat && entityCombat.timer <= 0;
-    }
-
-    public IEnumerator Attack()
-    {
-        actionState = ActionState.Attacking;
-        anim.SetBool("attacking", true);
-
-        // Wait one frame so the animator switches states
-        yield return null;
-
-        float animationLength = anim.GetCurrentAnimatorStateInfo(0).length - 0.01f;
-        yield return new WaitForSeconds(animationLength);
-
-        actionState = ActionState.Idle;
-        anim.SetBool("attacking", false);
-        yield break;
-    }
-    public void OnAttackFinished()
-    {
-        actionState = ActionState.Idle;
-        anim.SetBool("attacking", false);
+        if (entityBehavior.actionState == EntityBehavior.ActionState.Idle) Move();
+        else if (entityBehavior.actionState == EntityBehavior.ActionState.Attacking)
+            entityBehavior.rb.linearVelocity = Vector2.zero;
     }
 
     private void Move()
     {
-        direction = move.action.ReadValue<Vector2>();
+        Vector2 direction = move.action.ReadValue<Vector2>();
 
         if (direction.x > 0 && transform.localScale.x < 0 ||
             direction.x < 0 && transform.localScale.x > 0)
         {
-            Flip();
+            entityBehavior.Flip();
         }
 
-        anim.SetFloat("horizontal", Mathf.Abs(direction.x));
-        anim.SetFloat("vertical", Mathf.Abs(direction.y));
+        entityBehavior.UpdateAnimation(Mathf.Abs(direction.x), Mathf.Abs(direction.y));
 
         if (GetComponent<EntityHealth>().isAlive)
-            rb.linearVelocity = new Vector2(direction.x, direction.y) * speed;
+            entityBehavior.rb.linearVelocity = new Vector2(direction.x, direction.y) * entityBehavior.speed;
         else
-            rb.linearVelocity = new Vector2(0, 0);
+            entityBehavior.rb.linearVelocity = new Vector2(0, 0);
     }
 
-    private void Flip()
+    public void AddInteractable(IInteractable interactable)
     {
-        facingX *= -1;
-        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        if (!nearbyInteractables.Contains(interactable))
+            nearbyInteractables.Add(interactable);
+    }
+
+    public void RemoveInteractable(IInteractable interactable)
+    {
+        nearbyInteractables.Remove(interactable);
     }
 }
