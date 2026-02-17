@@ -1,0 +1,338 @@
+{
+    "Available Factions": [
+        "Blue",
+        "Red",
+        "Yellow",
+        "Grey"
+    ],
+    "Entities": [
+        {
+            "Name": "Cathedral",
+            "ID": 0,
+            "Type": "Cathedral",
+            "Faction": "Blue",
+            "locationX": -13.5,
+            "locationY": 15
+        },
+        {
+            "Name": "Pier",
+            "ID": 1,
+            "Type": "Pier",
+            "Faction": "Blue",
+            "locationX": 7,
+            "locationY": -2
+        },
+        {
+            "Name": "BlueBuilding1",
+            "ID": 2,
+            "Type": null,
+            "Faction": "Blue",
+            "locationX": -18,
+            "locationY": 14
+        },
+        {
+            "Name": "BlueBuilding2",
+            "ID": 3,
+            "Type": null,
+            "Faction": "Blue",
+            "locationX": -9,
+            "locationY": 14
+        },
+                {
+            "Name": "BlueBuilding3",
+            "ID": 4,
+            "Type": null,
+            "Faction": "Blue",
+            "locationX": -19,
+            "locationY": 9
+        },
+        {
+            "Name": "BlueBuilding4",
+            "ID": 5,
+            "Type": null,
+            "Faction": "Blue",
+            "locationX": -21,
+            "locationY": 3
+        },
+        {
+            "Name": "BlueBuilding5",
+            "ID": 6,
+            "Type": null,
+            "Faction": "Blue",
+            "locationX": -10,
+            "locationY": 4
+        },
+        {
+            "Name": "BlueBuilding6",
+            "ID": 7,
+            "Type": null,
+            "Faction": "Blue",
+            "locationX": -3,
+            "locationY": 2
+        },
+        {
+            "Name": "BlueBuilding7",
+            "ID": 8,
+            "Type": null,
+            "Faction": "Blue",
+            "locationX": -22,
+            "locationY": -7
+        },
+        {
+            "Name": "BlueBuilding8",
+            "ID": 9,
+            "Type": null,
+            "Faction": "Blue",
+            "locationX": -4,
+            "locationY": -5
+        },
+        {
+            "Name": "Castle",
+            "ID": 10,
+            "Type": "Castle",
+            "Faction": "Red",
+            "locationX": -2.5,
+            "locationY": -21
+        },
+        {
+            "Name": "TrainingGrounds",
+            "ID": 11,
+            "Type": "Training Grounds",
+            "Faction": "Red",
+            "locationX": 4,
+            "locationY": -23
+        },
+        {
+            "Name": "Barracks",
+            "ID": 12,
+            "Type": "Barracks",
+            "Faction": "Red",
+            "locationX": 7.5,
+            "locationY": -26
+        },
+        {
+            "Name": "Arena",
+            "ID": 13,
+            "Type": "Arena",
+            "Faction": "Red",
+            "locationX": -22.5,
+            "locationY": -40
+        },
+        {
+            "Name": "RedBuilding1",
+            "ID": 14,
+            "Type": null,
+            "Faction": "Red",
+            "locationX": -12,
+            "locationY": -24
+        },
+        {
+            "Name": "RedBuilding2",
+            "ID": 15,
+            "Type": null,
+            "Faction": "Red",
+            "locationX": -7,
+            "locationY": -24
+        },
+        {
+            "Name": "RedBuilding3",
+            "ID": 16,
+            "Type": null,
+            "Faction": "Red",
+            "locationX": -11,
+            "locationY": -33
+        },
+        {
+            "Name": "RedBuilding4",
+            "ID": 17,
+            "Type": null,
+            "Faction": "Red",
+            "locationX": -6,
+            "locationY": -33
+        },
+        {
+            "Name": "RedBuilding5",
+            "ID": 18,
+            "Type": null,
+            "Faction": "Red",
+            "locationX": -1,
+            "locationY": -33
+        },
+        {
+            "Name": "RedBuilding6",
+            "ID": 19,
+            "Type": null,
+            "Faction": "Red",
+            "locationX": 4,
+            "locationY": -33
+        },
+        {
+            "Name": "University",
+            "ID": 20,
+            "Type": "University",
+            "Faction": "Grey",
+            "locationX": -51.5,
+            "locationY": 15
+        },
+        {
+            "Name": "Library",
+            "ID": 21,
+            "Type": "Library",
+            "Faction": "Grey",
+            "locationX": -51.5,
+            "locationY": 4
+        },
+        {
+            "Name": "Dormitory1",
+            "ID": 22,
+            "Type": "Dormitory",
+            "Faction": "Grey",
+            "locationX": -76.5,
+            "locationY": 4
+        },
+        {
+            "Name": "Dormitory2",
+            "ID": 23,
+            "Type": "Dormitory",
+            "Faction": "Grey",
+            "locationX": -70.5,
+            "locationY": 4
+        },
+        {
+            "Name": "Dormitory3",
+            "ID": 24,
+            "Type": "Dormitory",
+            "Faction": "Grey",
+            "locationX": -64.5,
+            "locationY": 4
+        },
+        {
+            "Name": "GreyBuilding1",
+            "ID": 25,
+            "Type": null,
+            "Faction": "Grey",
+            "locationX": -47,
+            "locationY": 4
+        },
+        {
+            "Name": "GreyBuilding2",
+            "ID": 26,
+            "Type": null,
+            "Faction": "Grey",
+            "locationX": -43,
+            "locationY": 4
+        },
+        {
+            "Name": "GreyBuilding3",
+            "ID": 27,
+            "Type": null,
+            "Faction": "Grey",
+            "locationX": -40,
+            "locationY": 3
+        },
+        {
+            "Name": "GreyBuilding4",
+            "ID": 28,
+            "Type": null,
+            "Faction": "Grey",
+            "locationX": -53,
+            "locationY": -6
+        },
+        {
+            "Name": "GreyBuilding5",
+            "ID": 29,
+            "Type": null,
+            "Faction": "Grey",
+            "locationX": -49,
+            "locationY": -6
+        },
+        {
+            "Name": "GreyBuilding6",
+            "ID": 30,
+            "Type": null,
+            "Faction": "Grey",
+            "locationX": -45,
+            "locationY": -6
+        },
+        {
+            "Name": "Bank",
+            "ID": 31,
+            "Type": "Bank",
+            "Faction": "Yellow",
+            "locationX": -61.5,
+            "locationY": 23
+        },
+        {
+            "Name": "Tavern",
+            "ID": 32,
+            "Type": "Tavern",
+            "Faction": "Yellow",
+            "locationX": -53.5,
+            "locationY": -26
+        },
+        {
+            "Name": "GoldMine",
+            "ID": 33,
+            "Type": "Gold Mine",
+            "Faction": "Yellow",
+            "locationX": -74.5,
+            "locationY": -20
+        },
+        {
+            "Name": "YellowBuilding1",
+            "ID": 34,
+            "Type": null,
+            "Faction": "Yellow",
+            "locationX": -71,
+            "locationY": -23
+        },
+        {
+            "Name": "YellowBuilding2",
+            "ID": 35,
+            "Type": null,
+            "Faction": "Yellow",
+            "locationX": -67,
+            "locationY": -23
+        },
+        {
+            "Name": "YellowBuilding3",
+            "ID": 36,
+            "Type": null,
+            "Faction": "Yellow",
+            "locationX": -59,
+            "locationY": -26
+        },
+        {
+            "Name": "YellowBuilding4",
+            "ID": 37,
+            "Type": null,
+            "Faction": "Yellow",
+            "locationX": -65,
+            "locationY": -33
+        },
+        {
+            "Name": "YellowBuilding5",
+            "ID": 38,
+            "Type": null,
+            "Faction": "Yellow",
+            "locationX": -61,
+            "locationY": -33
+        },
+        {
+            "Name": "YellowBuilding6",
+            "ID": 39,
+            "Type": null,
+            "Faction": "Yellow",
+            "locationX": -56,
+            "locationY": -33
+        },
+        {
+            "Name": "YellowBuilding7",
+            "ID": 40,
+            "Type": null,
+            "Faction": "Yellow",
+            "locationX": -52,
+            "locationY": -33
+        }
+    ]
+}
