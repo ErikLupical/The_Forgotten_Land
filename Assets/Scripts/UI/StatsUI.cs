@@ -5,6 +5,8 @@ using TMPro;
 
 public class StatsUI : MonoBehaviour
 {
+    public static StatsUI instance;
+
     [Header("Avatar")]
     [SerializeField]
     private SerializedDictionary<string, Sprite> avatars;
@@ -40,6 +42,10 @@ public class StatsUI : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
+
+        // TODO: Make Avatar button match player type
+
         avatarButton.onClick.AddListener(ToggleStats);
 
         player = GameObject.FindGameObjectWithTag("Player");

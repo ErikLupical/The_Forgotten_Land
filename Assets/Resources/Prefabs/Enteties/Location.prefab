@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3778034042151289208}
   - component: {fileID: 1477413772286298611}
   m_Layer: 0
-  m_Name: location
+  m_Name: Location
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,12 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47acbc74bba4254ea4eccbc939fd79d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityInteractable
-  entityName: 
-  ID: 0
-  type: 
-  faction: 
+  entityName: Bank
+  ID: 31
+  type: Bank
+  faction: Yellow
   priority: 0
-  relationship: 0
 --- !u!58 &1477413772286298611
 CircleCollider2D:
   m_ObjectHideFlags: 0

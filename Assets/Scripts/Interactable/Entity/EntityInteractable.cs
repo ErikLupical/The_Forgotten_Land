@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EntityInteractable : MonoBehaviour, IInteractable
@@ -7,11 +8,11 @@ public class EntityInteractable : MonoBehaviour, IInteractable
     public string type;
     public string faction;
     public int priority;
-    public int relationship;
+    public Dictionary<int, int> relationship;
 
     public void Interact()
     {
-        UIManager.instance.OpenDialogue();
+        DialogueUI.instance.OpenDialogue();
     }
 
     public Transform GetTransform()

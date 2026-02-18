@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public EntityBehavior entityBehavior;
 
     private List<IInteractable> nearbyInteractables = new List<IInteractable>();
+    [SerializeField] private GameObject interactIndicator;
 
     private void OnEnable()
     {
@@ -100,10 +101,21 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!nearbyInteractables.Contains(interactable))
             nearbyInteractables.Add(interactable);
+
+        UpdateInteractIndicator();
     }
 
     public void RemoveInteractable(IInteractable interactable)
     {
         nearbyInteractables.Remove(interactable);
+
+        UpdateInteractIndicator();
+    }
+
+    private void UpdateInteractIndicator()
+    {
+        if (interactIndicator == null) return;
+
+        interactIndicator.SetActive(nearbyInteractables.Count > 0 && !inCombat);
     }
 }
