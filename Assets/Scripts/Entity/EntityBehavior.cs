@@ -5,8 +5,18 @@ public class EntityBehavior : MonoBehaviour
 {
     public float speed = 1f;
     public Rigidbody2D rb;
-    public Animator anim;
     public int facingX = 1;
+
+    public enum Faction { Blue, Grey, Red, Yellow }
+    public enum EntityType { Knight, Archer, Mage, Person }
+    public Faction faction;
+    public EntityType type;
+
+    public Animator anim;
+    private AnimatorOverrideController overrideController;
+    private AnimationClip idleClip;
+    private AnimationClip runClip;
+    private AnimationClip attackClip;
 
     public ActionState actionState;
     public EntityCombat entityCombat;
@@ -21,12 +31,27 @@ public class EntityBehavior : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
         entityCombat = GetComponent<EntityCombat>();
     }
 
     void Start()
     {
+        string path = $"Entities/{faction}/{type}/Animations";
+
+        idleClip = Resources.Load<AnimationClip>($"{path}/{type}_{faction}_Idle");
+        runClip = Resources.Load<AnimationClip>($"{path}/{type}_{faction}_Run");
+        attackClip = Resources.Load<AnimationClip>($"{path}/{type}_{faction}_Attack");
+
+        Debug.Log($"{path}/{type}_{faction}_Idle");
+        Debug.Log($"{path}/{type}_{faction}_Run");
+        Debug.Log($"{path}/{type}_{faction}_Attack");
+
+        overrideController = new AnimatorOverrideController(anim.runtimeAnimatorController);
+        overrideController["Knight_Blue_Idle"] = idleClip;
+        overrideController["Knight_Blue_Run"] = runClip;
+        overrideController["Knight_Blue_Attack"] = attackClip;
+        anim.runtimeAnimatorController = overrideController;
+
         actionState = ActionState.Idle;
     }
 

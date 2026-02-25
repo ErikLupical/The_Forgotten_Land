@@ -5,12 +5,8 @@ public abstract class AbilityObject : ScriptableObject
     [Header("Ability Information")]
     public string abilityName;
     public enum AbilityType
-    {
-        Knight,
-        Archer,
-        Monk,
-        Rogue
-    }
+    { Knight, Archer, Mage, Person }
+    public AbilityType allowedType;
     [TextArea(3, 5)]
     public string description;
 
@@ -19,8 +15,7 @@ public abstract class AbilityObject : ScriptableObject
 
     [Header("Hurtbox")]
     public Collider2D hurtbox;
-    // GameObject of the owner of this ability
-    public GameObject owner => hurtbox?.transform.parent?.gameObject;
+    public GameObject owner => hurtbox?.transform.parent?.gameObject; // GameObject of the owner of this ability
     public EntityCombat ownerCombat => owner?.GetComponent<EntityCombat>();
 
     [Header("Impact")]

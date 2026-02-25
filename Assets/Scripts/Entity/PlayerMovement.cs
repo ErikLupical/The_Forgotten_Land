@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static EntityBehavior;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class PlayerMovement : MonoBehaviour
 
     private List<IInteractable> nearbyInteractables = new List<IInteractable>();
     [SerializeField] private GameObject interactIndicator;
+
+    private void Awake()
+    {
+        StatsUI.instance.avatar.sprite = StatsUI.instance.avatars[$"{entityBehavior.type}{entityBehavior.faction}"];
+    }
 
     private void OnEnable()
     {

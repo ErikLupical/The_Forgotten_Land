@@ -6,6 +6,10 @@ public class DialogueUI : MonoBehaviour
     public static DialogueUI instance;
 
     [Header("Dialogue Box")]
+    public CanvasGroup playerAvatar;
+    public CanvasGroup healthBar;
+
+    [Header("Dialogue Box")]
     public GameObject dialogueBox;
     private EntityBehavior playerBehavior;
 
@@ -29,6 +33,14 @@ public class DialogueUI : MonoBehaviour
         playerBehavior.actionState = EntityBehavior.ActionState.Interacting;
         playerBehavior.rb.linearVelocity = Vector2.zero;
         playerBehavior.UpdateAnimation(0, 0);
+
+        playerAvatar.alpha = 0f;
+        playerAvatar.interactable = false;
+        playerAvatar.blocksRaycasts = false;
+
+        healthBar.alpha = 0f;
+        healthBar.interactable = false;
+        healthBar.blocksRaycasts = false;
     }
 
     public void CloseDialogue()
@@ -42,6 +54,14 @@ public class DialogueUI : MonoBehaviour
 
                 dialogueBox.SetActive(false);
                 playerBehavior.actionState = EntityBehavior.ActionState.Idle;
+
+                playerAvatar.alpha = 1f;
+                playerAvatar.interactable = true;
+                playerAvatar.blocksRaycasts = true;
+
+                healthBar.alpha = 1f;
+                healthBar.interactable = true;
+                healthBar.blocksRaycasts = true;
             }
         );
     }

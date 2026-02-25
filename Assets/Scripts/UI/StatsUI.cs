@@ -9,7 +9,7 @@ public class StatsUI : MonoBehaviour
 
     [Header("Avatar")]
     [SerializeField]
-    private SerializedDictionary<string, Sprite> avatars;
+    public SerializedDictionary<string, Sprite> avatars;
     public Image avatar;
     public Button avatarButton;
 
@@ -44,12 +44,10 @@ public class StatsUI : MonoBehaviour
     {
         instance = this;
 
-        // TODO: Make Avatar button match player type
-
-        avatarButton.onClick.AddListener(ToggleStats);
-
         player = GameObject.FindGameObjectWithTag("Player");
         UpdateStats();
+
+        avatarButton.onClick.AddListener(ToggleStats);
 
         statsCG = stats.GetComponent<CanvasGroup>();
     }

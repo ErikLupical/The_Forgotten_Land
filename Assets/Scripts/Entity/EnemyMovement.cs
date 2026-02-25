@@ -16,6 +16,9 @@ public class EnemyMovement : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindWithTag("Player").transform;
+
+        // Debugging
+        //Aggressive = true;
     }
 
     private void Start()

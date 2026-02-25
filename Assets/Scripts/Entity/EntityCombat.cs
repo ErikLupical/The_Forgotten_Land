@@ -7,6 +7,8 @@ public class EntityCombat : MonoBehaviour
 
     [Header("Abilities")]
     public Collider2D hurtbox;
+    public Collider2D rangedHurtbox;
+    public Collider2D meleeHurtbox;
     public AbilityObject ability;
 
     [Header("Timing")]

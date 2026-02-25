@@ -11,7 +11,6 @@ public class EnemyManager : MonoBehaviour
 
     private void Awake()
     {
-        // Simple singleton
         if (instance == null)
             instance = this;
         else
