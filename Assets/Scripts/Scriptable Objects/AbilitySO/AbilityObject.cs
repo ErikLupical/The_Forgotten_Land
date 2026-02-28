@@ -6,7 +6,7 @@ public abstract class AbilityObject : ScriptableObject
     public string abilityName;
     public enum AbilityType
     { Knight, Archer, Mage, Person }
-    public AbilityType allowedType;
+    public AbilityType abilityType;
     [TextArea(3, 5)]
     public string description;
 

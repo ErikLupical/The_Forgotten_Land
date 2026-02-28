@@ -1,24 +1,28 @@
-using System.Collections;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    public EntityBehavior entityBehavior;
+    private EntityBehavior.EntityType entityType;
+
     public Transform player;
     private bool aggressive;
-    public float range = 1.5f;
+    public float range;
 
     private float squareRrange;
     private float squareDistance;
     private Vector2 direction;
 
-    public EntityBehavior entityBehavior;
-
     private void Awake()
     {
         player = GameObject.FindWithTag("Player").transform;
 
+        entityType = entityBehavior.type;
+        range = (entityType == EntityBehavior.EntityType.Knight) || (entityType == EntityBehavior.EntityType.Person) ?
+            1.2f : 4.5f;
+
         // Debugging
-        //Aggressive = true;
+        Aggressive = true;
     }
 
     private void Start()

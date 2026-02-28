@@ -12,11 +12,20 @@ public class EntityHealth : MonoBehaviour
     public Animator anim;
     public Slider healthSlider;
     public TMP_Text healthText;
+    public Slider healthBar;
 
-    // Set player health on slider
     private void Start()
     {
-        if (gameObject.tag == "Player")
+        if (!CompareTag("Player"))
+        {
+            healthBar = GetComponentInChildren<Slider>();
+            healthBar.gameObject.SetActive(EnemyManager.instance.InCombat);
+
+            healthBar.maxValue = maxHealth;
+            healthBar.value = currentHealth;
+        }
+
+        if (CompareTag("Player"))
         {
             healthText.text = currentHealth + " / " + maxHealth;
             healthSlider.maxValue = maxHealth;
@@ -29,7 +38,7 @@ public class EntityHealth : MonoBehaviour
     // Set player health on slider
     void FixedUpdate()
     {
-        if (gameObject.tag == "Player")
+        if (CompareTag("Player"))
         {
             healthText.text = currentHealth + " / " + maxHealth;
             healthSlider.maxValue = maxHealth;
@@ -50,6 +59,12 @@ public class EntityHealth : MonoBehaviour
             if (currentHealth < 0) currentHealth = 0;
         }
 
+        if (!CompareTag("Player"))
+        {
+            healthBar.maxValue = maxHealth;
+            healthBar.value = currentHealth;
+        }
+
         if (currentHealth == 0)
         {
             isAlive = false;
@@ -60,21 +75,11 @@ public class EntityHealth : MonoBehaviour
     public IEnumerator Kill()
     {
         anim.Play("Death");
-
         // Wait one frame so the animator switches states
         yield return null;
-
         float deathLength = anim.GetCurrentAnimatorStateInfo(0).length - 0.1f;
         yield return new WaitForSeconds(deathLength);
-
-        if (gameObject.tag == "Player")
-        {
-            gameObject.SetActive(false);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        gameObject.SetActive(false);
         yield break;
     }
 }

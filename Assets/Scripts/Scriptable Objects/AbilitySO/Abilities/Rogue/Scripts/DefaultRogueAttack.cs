@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Combat/KnightAbilities/DefaultKnightAttack")]
-public class DefaultKnightAttack : AbilityObject
+[CreateAssetMenu(menuName = "Combat/RogueAbilities/DefaultRogueAttack")]
+public class DefaultRogueAttack : AbilityObject
 {
     public override void Execute()
     {

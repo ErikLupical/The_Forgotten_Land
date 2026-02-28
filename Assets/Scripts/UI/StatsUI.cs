@@ -44,19 +44,22 @@ public class StatsUI : MonoBehaviour
     {
         instance = this;
 
-        player = GameObject.FindGameObjectWithTag("Player");
-        UpdateStats();
-
         avatarButton.onClick.AddListener(ToggleStats);
 
         statsCG = stats.GetComponent<CanvasGroup>();
+    }
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        UpdateStats();
     }
 
     public void UpdateStats()
     {
         speed = player.GetComponent<EntityBehavior>().speed;
         attack = player.GetComponent<EntityCombat>().attack;
-        abilityName = player.GetComponent<EntityCombat>().ability.name;
+        abilityName = player.GetComponent<EntityCombat>().ability.abilityName;
         abilityDescription = player.GetComponent<EntityCombat>().ability.description;
 
         speedValue.text = speed.ToString();

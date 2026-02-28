@@ -42,10 +42,6 @@ public class EntityBehavior : MonoBehaviour
         runClip = Resources.Load<AnimationClip>($"{path}/{type}_{faction}_Run");
         attackClip = Resources.Load<AnimationClip>($"{path}/{type}_{faction}_Attack");
 
-        Debug.Log($"{path}/{type}_{faction}_Idle");
-        Debug.Log($"{path}/{type}_{faction}_Run");
-        Debug.Log($"{path}/{type}_{faction}_Attack");
-
         overrideController = new AnimatorOverrideController(anim.runtimeAnimatorController);
         overrideController["Knight_Blue_Idle"] = idleClip;
         overrideController["Knight_Blue_Run"] = runClip;
