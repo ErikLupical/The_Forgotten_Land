@@ -20,7 +20,7 @@ public class DialogueUI : MonoBehaviour
     [Header("Input")]
     public TextMeshProUGUI SayDoButtonText;
 
-    private void Awake()
+    private void Start()
     {
         instance = this;
         playerBehavior = (EntityBehavior)GameObject.Find("Player").GetComponent("EntityBehavior");
@@ -50,8 +50,6 @@ public class DialogueUI : MonoBehaviour
             "Are you sure you want close dialogue? The current event will not be recorded in history.",
             () =>
             {
-                Debug.Log("Confirmed!");
-
                 dialogueBox.SetActive(false);
                 playerBehavior.actionState = EntityBehavior.ActionState.Idle;
 

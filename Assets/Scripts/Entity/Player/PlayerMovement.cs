@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,21 +15,24 @@ public class PlayerMovement : MonoBehaviour
     private List<IInteractable> nearbyInteractables = new List<IInteractable>();
     [SerializeField] private GameObject interactIndicator;
 
-    private void Awake()
+    private void Start()
     {
         StatsUI.instance.avatar.sprite = StatsUI.instance.avatars[$"{entityBehavior.type}{entityBehavior.faction}"];
+
     }
 
     private void OnEnable()
     {
         interact.action.started += OnInteractCallback;
         normal.action.started += OnAttackCallback;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
         interact.action.started -= OnInteractCallback;
         normal.action.started -= OnAttackCallback;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void OnInteractCallback(InputAction.CallbackContext context)
@@ -38,6 +42,12 @@ public class PlayerMovement : MonoBehaviour
     private void OnAttackCallback(InputAction.CallbackContext context)
     {
         OnAttack();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        nearbyInteractables.Clear();
+        UpdateInteractIndicator();
     }
 
     public void OnInteract()

@@ -16,27 +16,28 @@ public class EntityHealth : MonoBehaviour
 
     private void Start()
     {
+        if (CompareTag("Player"))
+        {
+            healthSlider = GameObject.Find("Health Slider").GetComponent<Slider>();
+            healthText = GameObject.Find("HP Amount").GetComponent<TMP_Text>();
+
+            healthText.text = currentHealth + " / " + maxHealth;
+            healthSlider.maxValue = maxHealth;
+            healthSlider.value = currentHealth;
+        }
+
         if (!CompareTag("Player"))
         {
             healthBar = GetComponentInChildren<Slider>();
             healthBar.gameObject.SetActive(EnemyManager.instance.InCombat);
-
-            healthBar.maxValue = maxHealth;
-            healthBar.value = currentHealth;
-        }
-
-        if (CompareTag("Player"))
-        {
-            healthText.text = currentHealth + " / " + maxHealth;
-            healthSlider.maxValue = maxHealth;
-            healthSlider.value = currentHealth;
+            healthBar.maxValue = maxHealth; healthBar.value = currentHealth;
         }
 
         anim.SetInteger("health", currentHealth);
     }
 
     // Set player health on slider
-    void FixedUpdate()
+    void Update()
     {
         if (CompareTag("Player"))
         {

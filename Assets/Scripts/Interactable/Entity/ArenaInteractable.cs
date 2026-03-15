@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ArenaInteractable : MonoBehaviour, IInteractable
 {
@@ -16,7 +17,7 @@ public class ArenaInteractable : MonoBehaviour, IInteractable
             () =>
             {
                 // TODO: Enter arena
-                Debug.Log("Confirmed!");
+                SceneManager.LoadScene("Arena");
             }
             );
     }

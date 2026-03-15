@@ -22,7 +22,7 @@ public class EnemyMovement : MonoBehaviour
             1.2f : 4.5f;
 
         // Debugging
-        Aggressive = true;
+        //Aggressive = true;
     }
 
     private void Start()
